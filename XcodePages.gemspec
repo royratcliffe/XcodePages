@@ -8,8 +8,14 @@ Gem::Specification.new do |s|
   s.authors     = ["Roy Ratcliffe"]
   s.email       = ["roy@pioneeringsoftware.co.uk"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Helps you publish documentation from within Xcode using Doxygen}
+  s.description = %q{
+    Helps you publish HTML web pages on the Internet somewhere appropriate, e.g.
+    on GitHub via the gh-pages branch feature.
+
+    Works for Objective-C projects built using Apple's Xcode IDE and
+    consequently focuses on documentation within Objective-C and Objective-C++
+    source files; files ending with extensions h, m or mm.}
 
   s.rubyforge_project = "XcodePages"
 
@@ -18,9 +24,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
   s.add_development_dependency "rake"
   s.add_runtime_dependency "activesupport"
 end

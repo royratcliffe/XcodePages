@@ -33,7 +33,7 @@ module XcodePages
   def self.input
     Dir.glob('**/*.{h,m,mm}').map { |relative_path| File.dirname(relative_path) }.uniq.join(' ')
   end
-  
+
   # Answers the project "marketing version" using Apple's +agvtool+. The
   # marketing version is the "bundle short version string" appearing in the
   # bundle's +Info.plist+. Cocoa only uses this for display in the standard
@@ -41,13 +41,13 @@ module XcodePages
   def self.marketing_version
     %x(agvtool mvers -terse1).chomp
   end
-  
+
   # Answers the project build version using Apple's +agvtool+. This is the real
   # version number, equating to +CURRENT_PROJECT_VERSION+.
   def self.build_version
     %x(agvtool vers -terse).chomp
   end
-  
+
   # Answers what Doxygen calls the ‘project number.’ This is the revision
   # number appearing beside the project name in the documentation title. Uses
   # the marketing and build version numbers in the format +vMV (BV)+ where +MV+

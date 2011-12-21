@@ -2,6 +2,7 @@
 
 require "XcodePages/version"
 require 'active_support/core_ext/string'
+require 'tempfile'
 
 module XcodePages
   # Prints the environment. Xcode passes many useful pieces of information via
@@ -113,5 +114,21 @@ module XcodePages
   def self.doxygen_docset_install
     doxygen
     %x(cd #{html_output_directory} ; make install)
+
+    script = Tempfile.open(['XcodePages', '.scpt']) do |script|
+      script.puts <<-EOF
+        tell application "Xcode"
+      EOF
+      Dir.glob(File.join(html_output_directory, '*.docset')).each do |docset_path|
+        script.puts <<-EOF
+        	load documentation set with path "#{ENV['HOME']}/Library/Developer/Shared/Documentation/DocSets/#{File.basename(docset_path)}"
+        EOF
+      end
+      script.puts <<-EOF
+        end tell
+      EOF
+      script.close
+      %x(osascript #{script.path})
+    end
   end
 end

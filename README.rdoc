@@ -13,13 +13,15 @@ Step 1. Add a new target to your Xcode project. Suppose your Xcode project has t
 Step 2. Set the target up as follows.
 
 - Build Tool: <code>/bin/sh</code>
-- Arguments: <code>-c "$HOME/.rvm/bin/rvm-auto-ruby -r XcodePages -e XcodePages.doxygen"</code>
+- Arguments: <code>-c "$HOME/.rvm/bin/rvm-auto-ruby -r XcodePages -e XcodePages.doxygen_docset_install"</code>
 - Directory: None
 - Pass build setting in environment: Yes
 
 Leave Build Settings and Phases as defaults.
 
-Step 3. You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile the documentation. It will appear in folder +Pages+ within the source root folder.
+Step 3. You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile the documentation. It will appear in folder +MyProjectPages+ within the source root folder and a new Xcode +docset+ will appear in +~/Library/Developer/Shared/Documentation/DocSets+.
+
+You would normally have to reload Xcode to see the new documentation. As a courtesy, the last step tells the running Xcode application to pick up the new set.
 
 == Benefits
 

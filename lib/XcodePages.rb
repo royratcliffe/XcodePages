@@ -58,7 +58,7 @@ module XcodePages
   # repeating the same number if they are the same.
   def self.project_number
     project_number = "v#{marketing_version}"
-    project_number << " (#{build_version})" if build_version != marketing_version
+    project_number << "&nbsp;(#{build_version})" if build_version != marketing_version
   end
 
   def self.output_directory

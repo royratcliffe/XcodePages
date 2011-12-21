@@ -1,16 +1,28 @@
 = Xcode Pages
 
-The XcodePages gem helps you publish documentation from within Xcode using {Doxygen}[http://www.stack.nl/~dimitri/doxygen/].
+The XcodePages gem helps you publish documentation from within Xcode using
+{Doxygen}[http://www.stack.nl/~dimitri/doxygen/].
 
-The term 'Pages' comes from the ultimate goal: to publish the HTML web pages on the Internet somewhere appropriate, e.g. on {GitHub}[http://pages.github.com/] via the +gh-pages+ branch.
+The term 'Pages' comes from the ultimate goal: to publish the HTML web pages on
+the Internet somewhere appropriate, e.g. on GitHub via the +gh-pages+ {branch
+feature}[http://pages.github.com/].
 
-The gem works for Objective-C projects built using Apple's {Xcode IDE}[http://developer.apple.com/xcode/]. It consequently focuses on documentation within Objective-C and Objective-C++ source files, files ending with extensions +h+, +m+ or +mm+.
+The gem works for Objective-C projects built using Apple's {Xcode
+IDE}[http://developer.apple.com/xcode/]. It consequently focuses on
+documentation within Objective-C and Objective-C++ source files; files ending
+with extensions +h+, +m+ or +mm+.
 
 == How to Use Xcode Pages
 
-Step 1. Add a new target to your Xcode project. Suppose your Xcode project has the name +MyProject+. Add a new <em>External Build System</em> target called +MyProjectPages+.
+=== Step 1
 
-Step 2. Set the target up as follows.
+Add a new target to your Xcode project. Suppose your Xcode project has the name
++MyProject+. Add a new <em>External Build System</em> target called
++MyProjectPages+.
+
+=== Step 2
+
+Set the external build target up as follows.
 
 - Build Tool: <code>/bin/sh</code>
 - Arguments: <code>-c "$HOME/.rvm/bin/rvm-auto-ruby -r XcodePages -e XcodePages.doxygen_docset_install"</code>
@@ -19,13 +31,56 @@ Step 2. Set the target up as follows.
 
 Leave Build Settings and Phases as defaults.
 
-Step 3. You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile the documentation. It will appear in folder +MyProjectPages+ within the source root folder and a new Xcode +docset+ will appear in +~/Library/Developer/Shared/Documentation/DocSets+.
+Note that the arguments above tell the shell to run
+<code>$HOME/.rvm/bin/rvm-auto-ruby</code>. This assumes you are running
+{RVM}[http://beginrescueend.com/].
 
-You would normally have to reload Xcode to see the new documentation. As a courtesy, the last step tells the running Xcode application to pick up the new set.
+Also, do not try to promote your Ruby path to the Build Tool setting unless you
+have a fixed path to Ruby, e.g. +/usr/bin/ruby+. Xcode does *not* make
+environment variables substitutions within the Build Tool setting.
+
+=== Step 3
+
+Set up a new +Doxyfile+ in your project's source root containing four Doxygen settings:
+
+* <code>DOCSET_FEEDNAME        = "My Project Documentation Set"</code>
+* <code>DOCSET_BUNDLE_ID       = com.domain.MyProjectDocSet</code>
+* <code>DOCSET_PUBLISHER_ID    = com.domain.MyProjectDocSet.documentation</code>
+* <code>DOCSET_PUBLISHER_NAME  = My Publisher Name</code>
+
++DOCSET_BUNDLE_ID+ is the most significant item for this determines the base
+name for the documentation set. Doxygen just adds extension +docset+ to make the
+file name.
+
+=== Step 4
+
+You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile
+the documentation. It will appear in folder +MyProjectPages+ within the source
+root folder and a new Xcode +docset+ will appear in
++~/Library/Developer/Shared/Documentation/DocSets+.
+
+You would normally have to reload Xcode to see the new documentation. As a
+courtesy, the last step tells the running Xcode application to pick up the new
+set.
 
 == Benefits
 
+* Takes the "fiddle" out of fiddling with Doxygen.
 * You can easily identify undocumented classes and methods.
 
-  Warning messages output by Doxygen make this possible. After building your Pages target, the build results contain warning about undocumented elements within your project. Press the Cmd+\' (Jump to Next Issue command) to navigate through the undocumented code.
+  Warning messages output by Doxygen make this possible. After building your
+  project Pages target, the build results contain warning about undocumented
+  elements within your project. Press the Cmd+\' (Jump to Next Issue command) to
+  navigate through the undocumented code.
 
+== Examples
+
+You can find examples of projects using XcodePages here:
+
+* {Active Support Kit}[https://github.com/royratcliffe/ActiveSupportKit]
+
+== Prerequisites
+
+* Xcode and associated Apple developer tools
+* Ruby and RubyGems package manager
+* Doxygen

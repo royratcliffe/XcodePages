@@ -60,6 +60,14 @@ module XcodePages
     project_number << " (#{build_version})" if build_version != marketing_version
   end
 
+  def self.output_directory
+    "#{ENV['PROJECT_NAME']}Pages"
+  end
+
+  def self.html_output_directory
+    File.join(output_directory, 'html')
+  end
+
   # Launches Doxygen.
   #
   # The implementation derives the Doxygen project name from the environment
@@ -72,11 +80,12 @@ module XcodePages
       doxygen.puts <<-EOF
         PROJECT_NAME           = #{ENV['PROJECT_NAME'].titleize}
         PROJECT_NUMBER         = #{project_number}
-        OUTPUT_DIRECTORY       = #{ENV['PROJECT_NAME']}Pages
+        OUTPUT_DIRECTORY       = #{output_directory}
         TAB_SIZE               = 4
         EXTENSION_MAPPING      = h=Objective-C
         INPUT                  = #{input}
         SOURCE_BROWSER         = YES
+        HTML_TIMESTAMP         = NO
         GENERATE_LATEX         = NO
         HAVE_DOT               = YES
       EOF
@@ -93,5 +102,16 @@ module XcodePages
       # Read the read-end of the pipe and send the lines to standard output.
       puts doxygen.readlines
     end
+  end
+
+  def self.doxygen_docset
+    doxygen
+    # Assume that doxygen succeeds. But what happens when it does not?
+    %x(cd #{html_output_directory} ; make)
+  end
+
+  def self.doxygen_docset_install
+    # doxygen
+    %x(cd #{html_output_directory} ; make install)
   end
 end

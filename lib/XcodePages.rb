@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require "XcodePages/version"
+require 'active_support/core_ext/string'
 
 module XcodePages
   # Prints the environment. Xcode passes many useful pieces of information via
@@ -57,5 +58,40 @@ module XcodePages
   def self.project_number
     project_number = "v#{marketing_version}"
     project_number << " (#{build_version})" if build_version != marketing_version
+  end
+
+  # Launches Doxygen.
+  #
+  # The implementation derives the Doxygen project name from the environment
+  # PROJECT_NAME variable. Xcode passes this variable. Typically, it is a
+  # camel-cased name. Using ActiveSupport (part of the Rails framework) the
+  # implementation below derives a humanised title; effectively puts spaces
+  # in-between the camels!
+  def self.doxygen
+    IO.popen('doxygen -', 'r+') do |doxygen|
+      doxygen.puts <<-EOF
+        PROJECT_NAME           = #{ENV['PROJECT_NAME'].titleize}
+        PROJECT_NUMBER         = #{project_number}
+        OUTPUT_DIRECTORY       = #{ENV['PROJECT_NAME']}Pages
+        TAB_SIZE               = 4
+        EXTENSION_MAPPING      = h=Objective-C
+        INPUT                  = #{input}
+        SOURCE_BROWSER         = YES
+        GENERATE_LATEX         = NO
+        HAVE_DOT               = YES
+      EOF
+
+      # Let the user override the previous defaults by loading up the Doxyfile
+      # if one exists. This should appear in the source root folder.
+      if File.exists?('Doxyfile')
+        doxygen.write File.read('Doxyfile')
+      end
+
+      # Close the write-end of the pipe.
+      doxygen.close_write
+
+      # Read the read-end of the pipe and send the lines to standard output.
+      puts doxygen.readlines
+    end
   end
 end

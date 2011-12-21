@@ -1,0 +1,29 @@
+= Xcode Pages
+
+The XcodePages gem helps you publish documentation from within Xcode using {Doxygen}[http://www.stack.nl/~dimitri/doxygen/].
+
+The term 'Pages' comes from the ultimate goal: to publish the HTML web pages on the Internet somewhere appropriate, e.g. on {GitHub}[http://pages.github.com/] via the +gh-pages+ branch.
+
+The gem works for Objective-C projects built using Apple's {Xcode IDE}[http://developer.apple.com/xcode/]. It consequently focuses on documentation within Objective-C and Objective-C++ source files, files ending with extensions +h+, +m+ or +mm+.
+
+== How to Use Xcode Pages
+
+Step 1. Add a new target to your Xcode project. Suppose your Xcode project has the name +MyProject+. Add a new <em>External Build System</em> target called +MyProjectPages+.
+
+Step 2. Set the target up as follows.
+
+- Build Tool: <code>/bin/sh</code>
+- Arguments: <code>-c "$HOME/.rvm/bin/rvm-auto-ruby -r XcodePages -e XcodePages.doxygen"</code>
+- Directory: None
+- Pass build setting in environment: Yes
+
+Leave Build Settings and Phases as defaults.
+
+Step 3. You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile the documentation. It will appear in folder +Pages+ within the source root folder.
+
+== Benefits
+
+* You can easily identify undocumented classes and methods.
+
+  Warning messages output by Doxygen make this possible. After building your Pages target, the build results contain warning about undocumented elements within your project. Press the Cmd+\' (Jump to Next Issue command) to navigate through the undocumented code.
+

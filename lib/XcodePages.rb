@@ -111,7 +111,7 @@ module XcodePages
   end
 
   def self.doxygen_docset_install
-    # doxygen
+    doxygen
     %x(cd #{html_output_directory} ; make install)
   end
 end

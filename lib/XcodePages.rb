@@ -61,10 +61,15 @@ module XcodePages
     project_number << "&nbsp;(#{build_version})" if build_version != marketing_version
   end
 
+  # Answers the path of the output directory. Doxygen outputs to this folder.
+  # HTML web pages appear in the +html+ sub-folder.
   def self.output_directory
     "#{ENV['PROJECT_NAME']}Pages"
   end
 
+  # Answers the path to the +html+ output sub-folder where Doxygen writes the
+  # HTML web pages and the DocSet +Makefile+ when +GENERATE_DOCSET+ equals
+  # +YES+.
   def self.html_output_directory
     File.join(output_directory, 'html')
   end
@@ -105,12 +110,18 @@ module XcodePages
     end
   end
 
+  # Launches Doxygen and builds the Apple DocSet. It does not install the
+  # DocSet. The compiled documentation set remains in the +html+ sub-folder.
   def self.doxygen_docset
     doxygen
     # Assume that doxygen succeeds. But what happens when it does not?
     %x(cd #{html_output_directory} ; make)
   end
 
+  # Runs Doxygen and installs the Apple DocSet in the current user's shared
+  # documentation folder. Finally, as a courtesy, it tells Xcode about the
+  # change; signalling an update in your running Xcode IDE. Documentation
+  # updates immediately.
   def self.doxygen_docset_install
     doxygen
     %x(cd #{html_output_directory} ; make install)

@@ -104,7 +104,6 @@ module XcodePages
         SOURCE_BROWSER         = YES
         HTML_TIMESTAMP         = NO
         GENERATE_LATEX         = NO
-        HAVE_DOT               = YES
       EOF
 
       # Let the user override the previous defaults by loading up the Doxyfile

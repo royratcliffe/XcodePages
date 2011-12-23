@@ -1,3 +1,8 @@
+== Version 0.0.5 (2011-12-23)
+
+* Bug fix: works now when marketing and build version are equal.
+* Note, you need GENERATE_DOCSET = YES when generating Apple DocSets.
+
 == Version 0.0.4 (2011-12-23)
 
 Oops, bug fix. Forgot the \w+ part of the regular expression!

@@ -50,14 +50,14 @@ module XcodePages
   # +CURRENT_PROJECT_VERSION+ found in the environment.
   def self.marketing_version
     mvers = %x(agvtool mvers -terse1).chomp
-    mvers =~ /\$\{()\}/ ? ENV[$1] : mvers
+    mvers =~ /\$\{(\w+)\}/ ? ENV[$1] : mvers
   end
 
   # Answers the project build version using Apple's +agvtool+. This is the real
   # version number, equating to +CURRENT_PROJECT_VERSION+.
   def self.build_version
     vers = %x(agvtool vers -terse).chomp
-    vers =~ /\$\{()\}/ ? ENV[$1] : vers
+    vers =~ /\$\{(\w+)\}/ ? ENV[$1] : vers
   end
 
   # Answers what Doxygen calls the ‘project number.’ This is the revision

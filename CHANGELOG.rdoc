@@ -1,3 +1,7 @@
+== Version 0.0.4 (2011-12-23)
+
+Oops, bug fix. Forgot the \w+ part of the regular expression!
+
 == Version 0.0.3 (2011-12-23)
 
 Performs symbol substitutions using environment variables for marketing and

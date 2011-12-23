@@ -69,6 +69,7 @@ module XcodePages
   def self.project_number
     project_number = "v#{marketing_version}"
     project_number << "&nbsp;(#{build_version})" if build_version != marketing_version
+    project_number
   end
 
   # Answers the path of the output directory. Doxygen outputs to this folder.

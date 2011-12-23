@@ -76,7 +76,7 @@ set.
 
 * Takes the "fiddle" out of fiddling with Doxygen.
 
-  There is naturally more documentation and better when generating the
+  There is naturally more documentation, and better too, when generating the
   documentation is _easy_. Would it not be easy if you could just type some
   Doxygen comment blocks in Xcode, press Cmd+B to build the documentation and
   then immediately read it within Xcode's documentation? Try out

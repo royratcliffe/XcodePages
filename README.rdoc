@@ -75,6 +75,13 @@ set.
 == Benefits
 
 * Takes the "fiddle" out of fiddling with Doxygen.
+
+  There is naturally more documentation and better when generating the
+  documentation is _easy_. Would it not be easy if you could just type some
+  Doxygen comment blocks in Xcode, press Cmd+B to build the documentation and
+  then immediately read it within Xcode's documentation? Try out
+  XcodePages[http://rubydoc.info/gems/XcodePages]! It _is_ that easy.
+
 * You can easily identify undocumented classes and methods.
 
   Warning messages output by Doxygen make this possible. After building your

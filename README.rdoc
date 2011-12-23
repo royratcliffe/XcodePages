@@ -89,6 +89,10 @@ set.
   elements within your project. Press the Cmd+\' (Jump to Next Issue command) to
   navigate through the undocumented code.
 
+  Note, however, that you may still need to reload (or even restart Xcode) if
+  your major documentation sections change. Xcode document viewer appears to
+  cache them.
+
 == Examples
 
 You can find examples of projects using XcodePages here:

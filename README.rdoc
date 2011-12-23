@@ -52,6 +52,14 @@ Set up a new +Doxyfile+ in your project's source root containing four Doxygen se
 name for the documentation set. Doxygen just adds extension +docset+ to make the
 file name.
 
+==== Please Note
+
+Be aware that if you specify a +Doxyfile+ in the project source root folder, any
+settings provided therein *override* XcodePages defaults. This may include the
++INPUT+ setting and +OUTPUT_DIRECTORY+. Even a _blank_ value overrides the
+default. You need to comment out or delete the setting to allow XcodePages to
+auto-generate the appropriate default.
+
 === Step 4
 
 You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile

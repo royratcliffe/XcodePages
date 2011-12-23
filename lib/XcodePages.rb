@@ -40,14 +40,24 @@ module XcodePages
   # marketing version is the "bundle short version string" appearing in the
   # bundle's +Info.plist+. Cocoa only uses this for display in the standard
   # About panel.
+  #
+  # If the current marketing version is symbolic, answers the value of the
+  # symbol by looking up the value in the Unix environment. This assumes that
+  # Xcode provides the variable; and also assumes that Xcode addresses any
+  # nested substitution issues in scenarious where symbols comprise other
+  # symbols. Hence if +agvtool+ reports a marketing version equal to
+  # +${CURRENT_PROJECT_VERSION}+, the reply equals the value of
+  # +CURRENT_PROJECT_VERSION+ found in the environment.
   def self.marketing_version
-    %x(agvtool mvers -terse1).chomp
+    mvers = %x(agvtool mvers -terse1).chomp
+    mvers =~ /\$\{()\}/ ? ENV[$1] : mvers
   end
 
   # Answers the project build version using Apple's +agvtool+. This is the real
   # version number, equating to +CURRENT_PROJECT_VERSION+.
   def self.build_version
-    %x(agvtool vers -terse).chomp
+    vers = %x(agvtool vers -terse).chomp
+    vers =~ /\$\{()\}/ ? ENV[$1] : vers
   end
 
   # Answers what Doxygen calls the ‘project number.’ This is the revision

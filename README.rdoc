@@ -43,6 +43,7 @@ environment variables substitutions within the Build Tool setting.
 
 Set up a new +Doxyfile+ in your project's source root containing four Doxygen settings:
 
+* <code>GENERATE_DOCSET        = YES</code>
 * <code>DOCSET_FEEDNAME        = "My Project Documentation Set"</code>
 * <code>DOCSET_BUNDLE_ID       = com.domain.MyProjectDocSet</code>
 * <code>DOCSET_PUBLISHER_ID    = com.domain.MyProjectDocSet.documentation</code>

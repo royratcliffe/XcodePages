@@ -61,6 +61,19 @@ settings provided therein *override* XcodePages defaults. This may include the
 default. You need to comment out or delete the setting to allow XcodePages to
 auto-generate the appropriate default.
 
+==== When Pushing to GitHub Pages
+
+When your project uses GitHub for version control, you can conveniently publish
+the HTML documentation pages by pushing the HTML to branch +gh-pages+. However,
+is a caveat when doing this.
+
+You will need to touch and commit +.nojekyll+ in the root of your branch.
+Otherwise, the Doxygen pages will not appear. GitHub uses {Jekyll, a blog-aware
+static site generator}[https://github.com/mojombo/jekyll] that monkeys around
+with underscores within paths. Unfortunately, Doxygen uses underscore in path
+names as delimiters, by default. You can switch this off with +.nojekyll+ or
+tell Doxygen to use short names using +SHORT_NAMES = YES+ in your +Doxyfile+.
+
 === Step 4
 
 You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile

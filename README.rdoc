@@ -74,6 +74,18 @@ with underscores within paths. Unfortunately, Doxygen uses underscore in path
 names as delimiters, by default. You can switch this off with +.nojekyll+ or
 tell Doxygen to use short names using +SHORT_NAMES = YES+ in your +Doxyfile+.
 
+In addition, you might want to add some patterns for Git to ignore to your
++.gitignore+ for the +gh-pages+ branch. The following patterns match Doxygen's
+build cruft and the +docset+ bundle. No need to commit them to GitHub.
+
+* +*.map+
+* +*.md5+
+* +Info.plist+
+* +Makefile+
+* +Nodes.xml+
+* +Tokens.xml+
+* +*.docset/+
+
 === Step 4
 
 You can now switch target to +MyProjectPages+ and hit Build (Cmd+B) to compile

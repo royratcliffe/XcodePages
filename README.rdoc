@@ -29,8 +29,6 @@ Set the external build target up as follows.
 - Directory: None
 - Pass build setting in environment: Yes
 
-Leave Build Settings and Phases as defaults.
-
 Note that the arguments above tell the shell to run
 <code>$HOME/.rvm/bin/rvm-auto-ruby</code>. This assumes you are running
 {RVM}[http://beginrescueend.com/].
@@ -38,6 +36,25 @@ Note that the arguments above tell the shell to run
 Also, do not try to promote your Ruby path to the Build Tool setting unless you
 have a fixed path to Ruby, e.g. +/usr/bin/ruby+. Xcode does *not* make
 environment variables substitutions within the Build Tool setting.
+
+==== Build Settings
+
+Leave Build Settings and Phases as defaults, that is, unless you need
+to override your +PATH+ to add some non-standard executable
+locations. For instance, if you install {Doxygen.app using the OS X
+disk image}[http://www.stack.nl/~dimitri/doxygen/download.html] rather
+than installing Doxygen using MacPorts and such, then the +doxygen+
+binary lives at +/Applications/Doxygen.app/Contents/Resources+. You
+will need to add that path element to your Unix +PATH+ environment
+variable. Similarly, if you install {Graphviz from some
+package}[http://www.graphviz.org/Download_macos.php] and it lives at
+another unusual location, you will need to add that too. Best place
+for adding this for Xcode is within Build Settings. Note, Xcode's
+sub-processes do _not_ pick up your Bash profile, so setting these
+search paths up for your user account will not work. Instead, add a
+setting like this to your Pages build target.
+
+	PATH = /bin:/usr/bin:/usr/local/bin:/Applications/Doxygen.app/Contents/Resources:/usr/local/graphviz-2.14/bin
 
 === Step 3
 

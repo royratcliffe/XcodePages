@@ -1,7 +1,13 @@
 = Xcode Pages
 
 The XcodePages gem helps you publish documentation from within Xcode using
-{Doxygen}[http://www.stack.nl/~dimitri/doxygen/].
+{Doxygen}[http://www.stack.nl/~dimitri/doxygen/]. On Mountain Lion,
+prerequisites include {Doxygen
+1.8.2}[http://ftp.stack.nl/pub/users/dimitri/Doxygen-1.8.2.dmg] or above and
+optionally {GraphViz
+2.28.0}[http://www.graphviz.org/pub/graphviz/stable/macos/lion/graphviz-2.28.0.pkg]
+stable release or above. Drag the Doxygen application to +/Applications+ as
+normal. Double-click the GraphViz package to install it.
 
 The term 'Pages' comes from the ultimate goal: to publish the HTML web pages on
 the Internet somewhere appropriate, e.g. on GitHub via the +gh-pages+ {branch
